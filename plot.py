@@ -16,20 +16,20 @@ for loading in density_loadings:
     result = tally.mean.flatten()
     results.append(result)
     
-    # cumulative_result = np.cumsum(result) / np.sum(result)
-    # plt.stairs(cumulative_result, energy_bins, label=f"{loading} kg/m3", linewidth=2)
+    cumulative_result = np.cumsum(result) / np.sum(result)
+    plt.stairs(cumulative_result, energy_bins, label=f"{loading} kg/m3", linewidth=2)
 
 results = np.array(results)
 print(results.shape)
 
 # PLOTTING ###################################################
 # # cdf plot
-# plt.legend()
-# plt.xscale('log')
-# plt.xlabel('Neutron Energy (eV)')   
-# plt.ylabel(r'CDF of U238$(n,\gamma)$ to U239 Tallies')
-# plt.ylim(0,1)
-# plt.savefig('U238_ngamma_cdf.png', dpi=300)
+plt.legend()
+plt.xscale('log')
+plt.xlabel('Neutron Energy (eV)')   
+plt.ylabel(r'CDF of U238$(n,\gamma)$ to Pu239 Tallies')
+plt.ylim(0,1)
+plt.savefig('U238_ngamma_cdf.png', dpi=300)
 
 
 plt.figure()
