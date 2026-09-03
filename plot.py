@@ -2,7 +2,7 @@ import numpy as np
 import openmc
 import matplotlib.pyplot as plt
 
-density_loadings = [0, 0.01, 0.1, 1, 5, 10, 25, 50, 75, 100, 150, 250, 500]
+density_loadings = [0.1, 5, 10, 50, 100, 500] # [0, 0.01, 0.1, 1, 5, 10, 25, 50, 75, 100, 150, 250, 500]
 energy_bins = np.logspace(-1, 7.3, 100)
 results = []
 
@@ -32,15 +32,15 @@ plt.ylim(0,1)
 plt.savefig('U238_ngamma_cdf.png', dpi=300)
 
 
-plt.figure()
+# plt.figure()
 
-for i in range(10, 99, 10):
-    lower, upper = energy_bins[i], energy_bins[i + 1] 
-    print(lower, upper)
-    plt.scatter(density_loadings, results[:, i]/np.max(results[:, i]), label=f"{lower:.2e} - {upper:.2e} eV", s=20)
+# for i in range(10, 99, 10):
+#     lower, upper = energy_bins[i], energy_bins[i + 1] 
+#     print(lower, upper)
+#     plt.scatter(density_loadings, results[:, i]/np.max(results[:, i]), label=f"{lower:.2e} - {upper:.2e} eV", s=20)
     
-plt.plot(np.linspace(0, 500, 100), np.linspace(0, 1, 100), linewidth=1, color='black', linestyle='--')
-plt.xlabel('Density Loading (kg/m3)', fontsize=12)
-plt.ylabel('U238(n,gamma) Tallies \n Normalized Against Max. Tally per Energy Bin', fontsize=12)
-plt.legend(fontsize=10)
-plt.savefig('U238_ngamma_vs_loading.png', dpi=300)
+# plt.plot(np.linspace(0, 500, 100), np.linspace(0, 1, 100), linewidth=1, color='black', linestyle='--')
+# plt.xlabel('Density Loading (kg/m3)', fontsize=12)
+# plt.ylabel('U238(n,gamma) Tallies \n Normalized Against Max. Tally per Energy Bin', fontsize=12)
+# plt.legend(fontsize=10)
+# plt.savefig('U238_ngamma_vs_loading.png', dpi=300)
