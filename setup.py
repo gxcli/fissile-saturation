@@ -8,7 +8,9 @@ import os
 # natural lithium enrichment, uranium loaded, 900.0 K temperature
 # cross sections - need to download ENDF VIII.0 version and set the global environment variable 
 
-u238_density_loading_kgm3 = 500 # kg/m3, of total breeder volume 
+density_loadings = [0, 0.01, 0.1, 1, 5, 10, 25, 50, 75, 100, 150, 250, 500]
+
+u238_density_loading_kgm3 =  500 # kg/m3, of total breeder volume 
 print(u238_density_loading_kgm3, "kg/m3 of U238 in breeder")
 u238_density_loading_gcm3 = u238_density_loading_kgm3 / 1000 # g/cm3
 
@@ -42,13 +44,10 @@ MASSFRAC_U238_OF_UF4 = (AMU_U238 * U238_MOLFRAC_ENRICH) / (AMU_U235 * U235_MOLFR
 
 # UF4 displaces its own volume in FLiBe 
 fertile = openmc.Material(name='fertile', temperature=900.0)
-fertile.add_elements_from_formula('UF4', enrichment_type='ao')
-fertile.add_element('F', 4, 'ao')
-fertile.add_nuclide('U235', U235_MOLFRAC_ENRICH, 'ao')
-fertile.add_nuclide('U238', U238_MOLFRAC_ENRICH, 'ao')
+fertile.add_elements_from_formula('UF4', enrichment_type='ao') # atomic ratio
 
 uf4_density = 6.88 # g/cm3
-fertile.set_density('g/cm3', uf4_density)
+fertile.set_density('g/cm3', uf4_density) 
 
 u238_density_of_uf4 = (MASSFRAC_U238_OF_UF4 * uf4_density) # g U238 / cm3 
 vf_uf4 = u238_density_loading_gcm3 / u238_density_of_uf4 # volume fraction of UF4 in breeder
@@ -100,7 +99,7 @@ settings.source = source
 
 # run strat
 settings.batches = 150
-settings.particles = int(1e5)
+settings.particles = int(5e5)
 
 # cut off 
 settings.cutoff = {'energy_neutron': 1e-1}
@@ -117,12 +116,12 @@ settings.export_to_xml(path=run_dir + '/settings.xml')
 print('TALLIES TIME!')
 tallies = openmc.Tallies()
 
-# U238->U239 filters and scores
-tally = openmc.Tally(name='U238(n,gamma) to U239')
+# U238->Pu239 filters and scores
+tally = openmc.Tally(name='U238(n,gamma) to Pu239')
 energy_bins = np.logspace(-1, 7.3, 100) # energy bins from 0.1 eV to ~20 MeV
 energy_filter = openmc.EnergyFilter(energy_bins) # energy bins or can this be done continuously? 
 tally.filters = [energy_filter]
-tally.scores = ['(n,gamma)'] # to produce U239
+tally.scores = ['(n,gamma)'] # to produce Pu239
 tally.nuclides = ['U238']
 
 tallies.append(tally)

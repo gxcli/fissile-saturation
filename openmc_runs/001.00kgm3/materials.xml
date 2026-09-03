@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <materials>
   <material id="3" name="0001.00 kg/m3 | 0.0193 vol% of breeder" depletable="true" temperature="900.0">
-    <density value="1.9512305662501899" units="g/cm3"/>
-    <nuclide name="F19" ao="0.5714577590886951"/>
-    <nuclide name="Li6" ao="0.02142583506474795"/>
-    <nuclide name="Li7" ao="0.26425196579855803"/>
-    <nuclide name="Be9" ao="0.14283890043165298"/>
-    <nuclide name="U234" ao="2.758248776244678e-10"/>
-    <nuclide name="U235" ao="1.8363233936834665e-07"/>
-    <nuclide name="U238" ao="2.5355708181415704e-05"/>
+    <density value="1.9514520064277756" units="g/cm3"/>
+    <nuclide name="F19" ao="0.5714635959393499"/>
+    <nuclide name="Li6" ao="0.02142528788068593"/>
+    <nuclide name="Li7" ao="0.2642452171951265"/>
+    <nuclide name="Be9" ao="0.14283525253790622"/>
+    <nuclide name="U234" ao="1.654908134289397e-09"/>
+    <nuclide name="U235" ao="2.207770036929781e-07"/>
+    <nuclide name="U238" ao="3.0424015019457864e-05"/>
   </material>
 </materials>
